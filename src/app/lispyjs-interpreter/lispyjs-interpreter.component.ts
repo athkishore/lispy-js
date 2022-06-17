@@ -1,10 +1,13 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { NgTerminal, FunctionsUsingCSI } from 'ng-terminal';
+
+/****************Lispy-JS functions and environment variable********/
 declare var parse: any;
 declare var evaluate: any;
 declare var lispstr: any;
 declare var env: any;
 declare var standard_env: any;
+/********End of Lispy-JS functions and environment variable********/
 
 @Component({
   selector: 'app-lispyjs-interpreter',
