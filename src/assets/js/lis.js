@@ -38,6 +38,7 @@ standard_env = function() {
     '>=' : (a, b) => a >= b,
     'abs' : x => Math.abs(x),
     //'append' : ,
+    'begin': (...x) => x[x.length-1],
     'car' : x => x[0],
     'cdr' : x => x.slice(1),
     'cons' : (x, y) => [x].concat(y),
@@ -51,6 +52,7 @@ standard_env = function() {
     'min' : (x, y) => Math.min(x, y),
     'not' : (x) => !x, // !!not working as expected
     'null' : x => x == [], // !!not tested
+
 
   };
 
@@ -165,37 +167,28 @@ evaluate = function(x, env = global_env) {
     [_, params, body] = x;      // (lambda (var...) body)
     return new Procedure(params, body, env)
   } else {
-    proc = evaluate(x[0], env);      // return (proc arg...)
-    console.log(proc);
-    args = [];
+    var proc = evaluate(x[0], env);      // return (proc arg...)
+    //args = [for (item of x.slice(1)) evaluate(item, env)];
     // !!Try again using arrow function
-    for (let item of x.slice(1)) {
-        arg = evaluate(item, env);
-        args.push(arg);
-    }
+    // for (let item of x.slice(1)) {
+    //     arg = evaluate(item, env);
+    //     args.push(arg);
+    //     console.log(x, arg, args);
+    // }
+    var args = x.slice(1).map(item => (evaluate(item, env)));
+    //console.log(x, args);
     return proc(...args);
   }
 
 }
 
-var lis = {
+module.exports = {
   tokenize: tokenize,
   read_from_tokens: read_from_tokens,
   atom: atom,
   standard_env: standard_env,
   lispstr: lispstr,
-  //repl: repl,
-  evaluate: evaluate,
+  repl: repl,
   parse: parse,
+  evaluate: evaluate
 };
-
-// export default {
-//   tokenize: tokenize,
-//   read_from_tokens: read_from_tokens,
-//   atom: atom,
-//   standard_env: standard_env,
-//   lispstr: lispstr,
-//   //repl: repl,
-//   evaluate: evaluate
-// }
-//module.exports = lis;
