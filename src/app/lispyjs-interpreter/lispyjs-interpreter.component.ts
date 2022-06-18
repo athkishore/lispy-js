@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { NgTerminal, FunctionsUsingCSI } from 'ng-terminal';
+import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
+import { TerminalOutputComponent } from '../terminal-output/terminal-output.component';
+import { TerminalInputComponent } from '../terminal-input/terminal-input.component';
 
 /****************Lispy-JS functions and environment variable********/
 declare var parse: any;
@@ -15,50 +16,28 @@ declare var standard_env: any;
   styleUrls: ['./lispyjs-interpreter.component.css']
 })
 export class LispyjsInterpreterComponent implements AfterViewInit{
-  @ViewChild('term', { static: true }) child!: NgTerminal;
-  currentLine: string;
+  @Input() prompt: string = '';
+  @Input() numLines: number = 20;
+  outputTextBufferArr: Array<string> = [];
+  outputTextBuffer: string = '';
   value: string;
   env: Object;
+  currentLine: string = '';
   constructor() {
-    this.currentLine = '';
     this.value = '';
-    this.env = {};
+    this.env = standard_env();
+  }
+  ngOnInit() {
+    console.log('interpreter comp initialised with prompt: ', this.prompt);
+  }
+  ngOnChange() {
+    console.log(this.currentLine);
   }
   ngAfterViewInit(){
-    //...
-    //console.log(lis);
-    this.env = standard_env();
-    this.child.write(FunctionsUsingCSI.cursorColumn(1) + 'lispy-js> ');
-    this.child.keyEventInput.subscribe(e => {
-      console.log('keyboard event:' + e.domEvent.keyCode + ', ' + e.key);
-
-      const ev = e.domEvent;
-      const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
-
-      if (ev.keyCode === 13) {
-        this.value = evaluate(parse(this.currentLine), this.env);
-        var toPrint = typeof this.value == "undefined"? '' : lispstr(this.value);
-        this.child.write('\n' + FunctionsUsingCSI.cursorColumn(1) + toPrint + '\n' + FunctionsUsingCSI.cursorColumn(1) + 'lispy-js> '); // \r\n
-        this.currentLine = '';
-      } else if (ev.keyCode === 8) {
-        if (this.child.underlying.buffer.active.cursorX > 10) {
-          this.child.write('\b \b');
-          this.currentLine = this.currentLine.slice(0,-1);
-        }
-      } else if (printable) {
-        this.currentLine += e.key;
-        this.child.write(e.key);
-      }
-    })
-    //...
+  }
+  onLineChange(){
+    console.log(this.currentLine);
+    this.outputTextBufferArr.push(this.prompt + this.currentLine + '<br>');
+    this.outputTextBuffer = this.outputTextBufferArr.join('');
   }
 }
-
-// export class LispyjsInterpreterComponent implements OnInit {
-//
-//   constructor() { }
-//
-//   ngOnInit(): void {
-//   }
-//
-// }
