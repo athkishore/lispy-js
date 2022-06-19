@@ -1,32 +1,7 @@
-<<<<<<< HEAD
 # LispyJs
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
+This is a JavaScript translation of [Peter Norvig's Scheme interpreter written in Python]("http://norvig.com/lispy.html").
 
-## Development server
+The original work is in just 117 lines of code - it doesn't aim to be a comprehensive implementation of a Scheme interpreter, but to illustrate the basic ideas of parsing the Scheme syntax and evaluating expressions. This simple implementation does not handle errors (and assumes the programmer to be flawless!).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-=======
-# lispy-js
-Javascript translation of Peter Norvig's Scheme interpreter written in Python
->>>>>>> 4f8ab8f5d459e56b7c6fb25fe08b170f9ba8fcd3
+[The JavaScript version](https://github.com/athkishore/lispy-js-core) is slightly longer, at about 160 lines, and covers most of features in lis.py. You can type in Scheme expressions in the terminal below and see Lispy-JS do it's magic!
