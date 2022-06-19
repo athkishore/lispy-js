@@ -6,7 +6,7 @@ import { TerminalInputComponent } from '../terminal-input/terminal-input.compone
 declare var parse: any;
 declare var evaluate: any;
 declare var lispstr: any;
-declare var env: any;
+//declare var env: any;
 declare var standard_env: any;
 /********End of Lispy-JS functions and environment variable********/
 
@@ -19,10 +19,10 @@ export class LispyjsInterpreterComponent implements AfterViewInit{
   @Input() prompt: string = '';
   @Input() numLines: number = 20;
   outputTextBufferArr: Array<string> = [];
-  outputTextBuffer: string = '';
   value: string;
   env: Object;
   currentLine: string = '';
+  clickedCount: number = 0;
   constructor() {
     this.value = '';
     this.env = standard_env();
@@ -31,13 +31,20 @@ export class LispyjsInterpreterComponent implements AfterViewInit{
     console.log('interpreter comp initialised with prompt: ', this.prompt);
   }
   ngOnChange() {
-    console.log(this.currentLine);
   }
   ngAfterViewInit(){
   }
   onLineChange(){
-    console.log(this.currentLine);
-    this.outputTextBufferArr.push(this.prompt + this.currentLine + '<br>');
-    this.outputTextBuffer = this.outputTextBufferArr.join('');
+    this.outputTextBufferArr.push(this.prompt + this.currentLine);
+    var value = evaluate(parse(this.currentLine), this.env);
+    console.log(this.env);
+    this.outputTextBufferArr.push(lispstr(value));
+    if (this.outputTextBufferArr.length > this.numLines) {
+      this.outputTextBufferArr = this.outputTextBufferArr.slice(2);
+    }
+  }
+  makeInputActive(){
+    // dummy click count to trigger focus of input
+    this.clickedCount++;
   }
 }

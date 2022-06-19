@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TerminalOutputComponent implements OnInit {
 
-  @Input() contents: string = '';
+  @Input() contents: Array<string> = [];
   constructor() { }
 
   ngOnInit(): void {

@@ -1,5 +1,5 @@
-<h1>Coming soon...</h1>
-<div id="terminal" class="terminal">
-  <app-terminal-output id="out" [innerHTML]="outputTextBuffer"></app-terminal-output>
-  <app-terminal-input [(currentLine)]="currentLine" (currentLineChange)="onLineChange()" id="in" value="" [prompt]="prompt" active="true" clicked="0"></app-terminal-input>
+<div id="terminal" class="terminal" (click)="makeInputActive()">
+  <app-terminal-output id="out" [contents]="outputTextBufferArr"></app-terminal-output>
+  <app-terminal-input [(currentLine)]="currentLine" (currentLineChange)="onLineChange()"
+  id="in" value="" [prompt]="prompt" [clickedCount]="clickedCount"></app-terminal-input>
 </div>

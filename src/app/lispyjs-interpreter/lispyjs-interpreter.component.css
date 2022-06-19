@@ -6,6 +6,6 @@
 }
 #terminal {
   width: 100%;
-  /* max-width: 800px; */
-  height: 400px;
+  height: 420px;
+  overflow: hidden;
 }

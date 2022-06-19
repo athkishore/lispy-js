@@ -1,8 +1,3 @@
-// const readline = require('readline').createInterface({
-//   input: process.stdin,
-//   output: process.stdout,
-// });
-
 Sym = String;
 Num = Number;
 List = Array;
@@ -119,24 +114,13 @@ atom = function(token) {
   return Sym(token); // !!Revisit - Sym vs primitive string
 };
 /////////////////////////////////////////////////////////
-////// REPL /////////////////////////////////////////////
-
-// repl = function(prompt = "lispy.js> ") {
-//   const readline = require('readline').createInterface({
-//     input: process.stdin,
-//     output: process.stdout,
-//   });
-//   readline.question(prompt, function(exp) {
-//     val = evaluate(parse(exp));
-//     if (val) {
-//       console.log(lispstr(val));
-//     }
-//     readline.close();
-//     repl();
-//   });
-// };
-
+/// Formatting for output
 lispstr = function(exp) {
+  // !!added on 18/6 for web comp version
+  if (typeof exp == "undefined") {
+    return '';
+  }
+  ////
   if (exp instanceof List) {
     return '(' + exp.join(' ') + ')';
   } else {
@@ -147,9 +131,8 @@ lispstr = function(exp) {
 /////////////////////////////////////////////////////////
 // !!rename to eval after cleaning up module structure
 evaluate = function(x, env = global_env) {
-  // console.log(x);
   // Evaluate an expression in an environment.
-  if (typeof x == 'string') { // Revist to see if it needs to be using instanceof Sym
+  if (typeof x == 'string') {
     return env[x];  // variable reference
   } else if (!(x instanceof List)) {
     return x;       // constant literal
@@ -162,33 +145,13 @@ evaluate = function(x, env = global_env) {
   } else if (x[0] == 'define') {
     [_, variable, exp] = x;          // (define variable exp)
     env[variable] = evaluate(exp, env);
-    //return env; !!Need some other way to test define variable
   } else if (x[0] == 'lambda') {
     [_, params, body] = x;      // (lambda (var...) body)
     return new Procedure(params, body, env)
   } else {
     var proc = evaluate(x[0], env);      // return (proc arg...)
-    //args = [for (item of x.slice(1)) evaluate(item, env)];
-    // !!Try again using arrow function
-    // for (let item of x.slice(1)) {
-    //     arg = evaluate(item, env);
-    //     args.push(arg);
-    //     console.log(x, arg, args);
-    // }
     var args = x.slice(1).map(item => (evaluate(item, env)));
-    //console.log(x, args);
     return proc(...args);
   }
 
 }
-
-module.exports = {
-  tokenize: tokenize,
-  read_from_tokens: read_from_tokens,
-  atom: atom,
-  standard_env: standard_env,
-  lispstr: lispstr,
-  repl: repl,
-  parse: parse,
-  evaluate: evaluate
-};

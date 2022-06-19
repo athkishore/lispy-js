@@ -1,8 +1,9 @@
-<div id="inputLine" class="terminal" style="display: inline">
-  <div id="prompt" class="terminal " style="display: inline">
+<div id="inputLine" class="terminal">
+  <span id="prompt" class="terminal ">
     {{ prompt }}
-  </div>
-  <div id="inputDiv" class="terminal" style="display: inline">
-    <input #line id="in1" (keyup)="checkAndSendLine($event)" class="terminal">
-  </div>
+  </span>
+  <span id="editableSpan" #editable contenteditable="true" class="terminal"
+  (keyup)="checkAndSendLine($event)" spellcheck="false">
+    
+  </span>
 </div>
