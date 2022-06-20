@@ -1,5 +1,7 @@
 .text {
-  width: 30vw;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 35vw;
   min-width:300px;
   padding-right: 10px;
 }
