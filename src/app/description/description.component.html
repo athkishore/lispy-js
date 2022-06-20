@@ -1,0 +1,170 @@
+<div id="container">
+
+<div id="buttonDiv">
+<button id="prev" *ngIf="page > 0" (click)="prevPage()">
+  Prev
+</button>
+<button id="next" *ngIf="page < 4" (click)="nextPage()">
+  Next
+</button>
+</div>
+
+<!-- 1st page -->
+<div class="text" *ngIf="page===0">
+  <p>This is a JavaScript translation of
+    <a href="http://norvig.com/lispy.html" target="_blank">
+      Peter Norvig's Scheme interpreter written in Python.
+    </a>
+  </p>
+
+  <p>The original work is in just 117 lines of code - it doesn't aim to be a
+    comprehensive implementation of a Scheme interpreter, but to illustrate the
+    basic ideas of parsing the Scheme syntax and evaluating expressions. This simple
+    implementation does not handle errors (and assumes the programmer to be flawless!).
+  </p>
+  <p>
+    <a href="https://github.com/athkishore/lispy-js-core" target="_blank">
+      The JavaScript version
+    </a>
+     is slightly longer, at about 160 lines, and covers most of
+    features in lis.py. You can type in Scheme expressions in the terminal below and
+    see Lispy-JS do it's magic!
+  </p>
+  <p>
+    If you are not familiar with Scheme, click on the next button to get started with
+    the help of a tutorial.
+  </p>
+</div>
+
+
+<!-- 2nd page: Tutorial -->
+<div class="text" *ngIf="page===1">
+  <h3>Arithmetic expressions</h3>
+  <p>
+    You can use Scheme as a calculator. Scheme expects arithmetic expressions to be
+   in "prefix notation". <code>1 + 2</code> is entered as <code>(+ 1 2)</code>.
+  </p>
+
+  <p>
+    Try nested expressions:
+
+    <code> <ul>
+      <li>(+ (+ 1 2) 3)
+      <li>(+ (* 3 4) (* 5 6))
+    </ul></code>
+  </p>
+  <p>
+    You can define your own variables using the 'define' keyword.
+  </p>
+
+  <code>(define x 25)<br>x</code>
+
+  <p>
+    Expressions using variables:
+    <code><ul>
+      <li>(+ x x)</li>
+      <li>(+ (* x 2) (* x 3))
+    </ul></code>
+  </p>
+
+</div>
+
+<!-- 3rd page: Tutorial -->
+<div class="text" *ngIf="page===2">
+  <h3>Functions</h3>
+  <p>
+    You can define your own functions with the help of the 'lambda' keyword.
+    Given below is a function to find the square of a number.
+  </p>
+  <code>
+    (define sq (lambda (x) (* x x)))
+  </code>
+
+  <p>
+    Invoke it as follows:
+  </p>
+
+  <code>(sq 6)</code>
+
+  <p>
+    Function calls can be nested within other calls. For example:
+  </p>
+
+  <code>(sq (sq (sq 6)))</code>
+</div>
+
+<!-- 4th page: Tutorial -->
+<div class="text" *ngIf="page===3">
+  <h3>Recursion</h3>
+  <p>
+    The full power of repetition can be invoked by using recursion within functions.
+    See how we can write a recursive function for finding the factorial of a number.
+  </p>
+
+  <p>
+    The function to find the factorial (n!) of a number n can be written recursively.
+  </p>
+  <p>
+    n! = 1 x 2 x 3 x ... x n-1 x n
+  </p>
+  <p>
+    n! = (n-1)! x n
+  </p>
+  <p>
+  In the base case, 1! = 1
+  </p>
+  <p>
+    In Scheme, this can be written as:
+  </p>
+
+  <p>
+  <code>(define fact (lambda (n) <br>
+    &nbsp;(if (<= n 1)<br>
+    &nbsp;&nbsp;1<br>
+    &nbsp;&nbsp;(* n (fact (- n 1)))<br>
+    )))</code>
+  </p>
+
+  <p>
+  <code>(fact 10)</code>
+  </p>
+</div>
+
+<!-- 5th page: Tutorial -->
+<div class="text" *ngIf="page===4">
+  <h3>Another Example of Recursion</h3>
+  <p>
+    The Greatest Common Divisor (GCD) of two numbers can be found out recursively
+    using Euclid's algorithm.
+  </p>
+
+  <p>
+    The smaller number is subtracted from the greater number repeatedly until they
+    both become equal. At this point both numbers equal the GCD.
+  </p>
+
+  <p>
+  <code>(define gcd (lambda (x y) <br>
+    &nbsp;(if (= x y)<br>
+    &nbsp;&nbsp;x<br>
+    &nbsp;&nbsp;(if (> x y)<br>
+    &nbsp;&nbsp;&nbsp;(gcd (- x y) y)<br>
+    &nbsp;&nbsp;&nbsp;(gcd x (- y x))<br>
+    ))))</code>
+  </p>
+
+  <p>
+  <code>(gcd 100 60)</code>
+  </p>
+
+  <p>To learn more about Scheme, see
+    <a href="http://www.shido.info/lisp/idx_scm_e.html"
+    target="_blank">
+      http://www.shido.info/lisp/idx_scm_e.html
+    </a>
+  </p>
+
+</div>
+
+
+</div>

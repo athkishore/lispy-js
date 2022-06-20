@@ -1,0 +1,24 @@
+.text {
+  width: 30vw;
+  min-width:300px;
+  padding-right: 10px;
+}
+#container {
+  position: relative;
+}
+#next {
+  position: absolute;
+  right: 5%;
+}
+#prev {
+  position: relative;
+  left: 0%;
+}
+button {
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: dark-purple;
+}
+#buttonDiv {
+  height: 30px;
+}
