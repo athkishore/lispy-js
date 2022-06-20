@@ -21,6 +21,10 @@ export class TerminalInputComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+    //console.log(this.in);
+  }
+
   ngOnChanges(changes: any): void {
     if(typeof changes['clickedCount'] !== 'undefined') {
         this.in.nativeElement.focus();
