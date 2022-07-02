@@ -4,6 +4,7 @@
   font-family: "Courier New", Courier, monospace;
   font-size: 16px;
   padding: 5px;
+  margin-left:20px;
 }
 #terminal {
   width: 60vw;
